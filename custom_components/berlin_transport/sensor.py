@@ -83,7 +83,7 @@ async def async_setup_platform(
     """Set up the sensor platform."""
     if CONF_DEPARTURES in config:
         for departure in config[CONF_DEPARTURES]:
-            async_add_entities([TransportSensor(hass, departure)])
+            async_add_entities([TransportSensor(hass, departure)], update_before_add=True)
 
 
 async def async_setup_entry(
@@ -91,7 +91,7 @@ async def async_setup_entry(
     config_entry: ConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    async_add_entities([TransportSensor(hass, config_entry.data, config_entry.entry_id)])
+    async_add_entities([TransportSensor(hass, config_entry.data, config_entry.entry_id)], update_before_add=True)
 
 
 class TransportSensor(SensorEntity):
